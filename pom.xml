@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+        <version>3.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>dev.otthon</groupId>
@@ -15,6 +15,9 @@
     <description>sistema-web</description>
     <properties>
         <java.version>21</java.version>
+        <webjar-locator.version>0.47</webjar-locator.version>
+		<webjar-adminlte.version>3.2.0</webjar-adminlte.version>
+		<webjar-crypto-js.version>4.1.1</webjar-crypto-js.version>
     </properties>
     <dependencies>
         <dependency>
@@ -39,7 +42,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <version>2.2.224</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
@@ -56,6 +59,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>${webjar-locator.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>AdminLTE</artifactId>
+			<version>${webjar-adminlte.version}</version>
+		</dependency>
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package dev.otthon.sistemaweb.core.models;
 
+import dev.otthon.sistemaweb.web.clients.dtos.ClientForm.ClientFormBuilder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,4 +35,9 @@ public class Client {
 
     @Column(length = 11, nullable = false, unique = true)
     private String phone;
+
+    public static ClientFormBuilder builder() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'builder'");
+    }
 }
