@@ -4,9 +4,19 @@
 
 <th:block th:fragment="content">
   <h1>Boas Vindas</h1>
-  <p>
-    Este é um projeto de exemplo para o curso de Spring Boot da TreinaWeb
-  </p>
+
+  <p>ESSA PÁGINA ESTÁ SENDO ACESSADA PELO: <code>package dev.otthon.sistemaweb.web.home.controllers;</code></p>
+  <code>
+    @Controller
+    @RequestMapping("/")
+    public class HomeController {
+
+    @GetMapping
+    public String index() {
+        return "home/index";
+    }
+  }
+  </code>
 </th:block>
 
 </html>

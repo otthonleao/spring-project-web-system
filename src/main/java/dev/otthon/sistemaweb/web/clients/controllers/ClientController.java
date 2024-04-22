@@ -16,7 +16,7 @@ import dev.otthon.sistemaweb.web.clients.dtos.ClientListItem;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+@RequiredArgsConstructor // Cria os construtores com argumentos obrigatórios `final`, como o ClientRepository
 @RequestMapping("/clients")
 public class ClientController {
 
@@ -28,6 +28,7 @@ public class ClientController {
             .stream()
             .map(ClientListItem::of)
             .toList();
+            
         var model = Map.of("clients", clients);
         return new ModelAndView("clients/index", model);
     }
