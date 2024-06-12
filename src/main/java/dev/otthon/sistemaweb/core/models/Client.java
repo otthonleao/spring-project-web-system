@@ -32,9 +32,5 @@ public class Client {
 
     @Column(length = 11, nullable = false, unique = true)
     private String phone;
-
-    public static ClientFormBuilder builder() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'builder'");
-    }
+    
 }
