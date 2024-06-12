@@ -14,11 +14,19 @@ import java.time.LocalDate;
 public class EmployeeDetails {
 
     private String name;
+
     private String email;
+
     private String phone;
+
     private String cpf;
+
     private LocalDate birthDate;
+
     private LocalDate hireDate;
+
     private LocalDate resignationDate;
+
+    private String address;
 
 }

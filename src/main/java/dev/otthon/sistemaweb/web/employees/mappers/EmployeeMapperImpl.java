@@ -11,8 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class EmployeeMapeerImpl implements EmployeeMapper {
+public class EmployeeMapperImpl implements EmployeeMapper {
 
+    private final AddressMapper addressMapper;
     private final EmployeeRepository employeeRepository;
 
     @Override
@@ -25,6 +26,7 @@ public class EmployeeMapeerImpl implements EmployeeMapper {
                 .birthDate(employeeForm.getBirthDate())
                 .hireDate(employeeForm.getHireDate())
                 .resignationDate(employeeForm.getResignationDate())
+                .address(addressMapper.toAddress(employeeForm.getAddress()))
                 .build();
     }
 
@@ -38,6 +40,7 @@ public class EmployeeMapeerImpl implements EmployeeMapper {
                 .birthDate(employee.getBirthDate())
                 .hireDate(employee.getHireDate())
                 .resignationDate(employee.getResignationDate())
+                .address(addressMapper.toAddressForm(employee.getAddress()))
                 .build();
     }
 
@@ -61,6 +64,7 @@ public class EmployeeMapeerImpl implements EmployeeMapper {
                 .birthDate(employee.getBirthDate())
                 .hireDate(employee.getHireDate())
                 .resignationDate(employee.getResignationDate())
+                .address(addressMapper.formatAddress(employee.getAddress()))
                 .build();
     }
 

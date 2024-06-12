@@ -42,4 +42,7 @@ public class Employee {
     @Column(nullable = true)
     private LocalDate resignationDate;
 
+    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Address address;
+
 }
