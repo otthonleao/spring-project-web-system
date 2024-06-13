@@ -1,4 +1,4 @@
-package dev.otthon.sistemaweb.web.employees.dtos;
+package dev.otthon.sistemaweb.web.positions.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,15 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeListItem {
-
-    private Long id;
+public class PositionForm {
 
     private String name;
 
-    private String email;
-
-    private String phone;
-
-    private String position;
 }

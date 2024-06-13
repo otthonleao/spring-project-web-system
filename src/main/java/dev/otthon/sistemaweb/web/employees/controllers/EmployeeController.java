@@ -2,6 +2,7 @@ package dev.otthon.sistemaweb.web.employees.controllers;
 
 import dev.otthon.sistemaweb.core.exceptions.EmployeeNotFoundException;
 import dev.otthon.sistemaweb.core.repositories.EmployeeRepository;
+import dev.otthon.sistemaweb.core.repositories.PositionRepository;
 import dev.otthon.sistemaweb.web.employees.dtos.EmployeeForm;
 import dev.otthon.sistemaweb.web.employees.mappers.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class EmployeeController {
 
     private final EmployeeMapper employeeMapper;
     private final EmployeeRepository employeeRepository;
+    private final PositionRepository positionRepository;
 
     @GetMapping
     public ModelAndView index() {
@@ -45,9 +47,11 @@ public class EmployeeController {
     /* RESPONSÁVEL POR EXIBIR O FORMULÁRIO DE CADASTRO DE NOVO FUNCIONÁRIO */
     @GetMapping("/create")
     public ModelAndView create() {
+        var positions = positionRepository.findAll();
         var model = Map.of(
                 "pageTitle", "Cadastro de Funcionário",
-                "employeeForm", new EmployeeForm()
+                "employeeForm", new EmployeeForm(),
+                "positions", positions
         );
         return new ModelAndView("employees/form", model);
     }
@@ -64,9 +68,11 @@ public class EmployeeController {
         var employeeForm = employeeRepository.findById(id)
                 .map(employeeMapper::toEmployeeForm)
                 .orElseThrow(EmployeeNotFoundException::new);
+        var positions = positionRepository.findAll();
         var model = Map.of(
                 "pageTitle", "Edição de Funcionário",
-                "employeeForm", employeeForm
+                "employeeForm", employeeForm,
+                "positions", positions
         );
         return new ModelAndView("employees/form", model);
     }

@@ -45,4 +45,9 @@ public class Employee {
     @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
+    // Muitos empregados tem somente um cargo.
+    // Não é opcional que algum empregado fique sem cargo.
+    @ManyToOne(optional = false)
+    private Position position;
+
 }

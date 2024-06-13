@@ -1,7 +1,9 @@
 package dev.otthon.sistemaweb.web.employees.mappers;
 
+import dev.otthon.sistemaweb.core.exceptions.PositionNotFoundException;
 import dev.otthon.sistemaweb.core.models.Employee;
 import dev.otthon.sistemaweb.core.repositories.EmployeeRepository;
+import dev.otthon.sistemaweb.core.repositories.PositionRepository;
 import dev.otthon.sistemaweb.core.utils.StringUtils;
 import dev.otthon.sistemaweb.web.employees.dtos.EmployeeDetails;
 import dev.otthon.sistemaweb.web.employees.dtos.EmployeeForm;
@@ -14,10 +16,14 @@ import org.springframework.stereotype.Component;
 public class EmployeeMapperImpl implements EmployeeMapper {
 
     private final AddressMapper addressMapper;
-    private final EmployeeRepository employeeRepository;
+    private final PositionRepository positionRepository;
 
     @Override
     public Employee toEmployee(EmployeeForm employeeForm) {
+
+        var position = positionRepository.findById(employeeForm.getPositionId())
+                .orElseThrow(PositionNotFoundException::new);
+
         return Employee.builder()
                 .name(employeeForm.getName())
                 .email(employeeForm.getEmail())
@@ -27,6 +33,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .hireDate(employeeForm.getHireDate())
                 .resignationDate(employeeForm.getResignationDate())
                 .address(addressMapper.toAddress(employeeForm.getAddress()))
+                .position(position)
                 .build();
     }
 
@@ -41,6 +48,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .hireDate(employee.getHireDate())
                 .resignationDate(employee.getResignationDate())
                 .address(addressMapper.toAddressForm(employee.getAddress()))
+                .positionId(employee.getPosition().getId())
                 .build();
     }
 
@@ -51,6 +59,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .name(employee.getName())
                 .email(employee.getEmail())
                 .phone(StringUtils.formatPhone(employee.getPhone()))
+                .position(employee.getPosition().getName())
                 .build();
     }
 
@@ -65,6 +74,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
                 .hireDate(employee.getHireDate())
                 .resignationDate(employee.getResignationDate())
                 .address(addressMapper.formatAddress(employee.getAddress()))
+                .position(employee.getPosition().getName())
                 .build();
     }
 
