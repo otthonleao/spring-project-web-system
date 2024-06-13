@@ -43,7 +43,7 @@ public class Employee {
     @Column(nullable = true)
     private LocalDate resignationDate;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Address address;
 
     // Muitos empregados tem somente um cargo.
