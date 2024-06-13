@@ -51,5 +51,10 @@ public class Project {
 
     // Muitos times, ou membros dos times, podem ter muitos projetos
     @ManyToMany
+    @JoinTable(
+            name = "project_team",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private List<Employee> team;
 }

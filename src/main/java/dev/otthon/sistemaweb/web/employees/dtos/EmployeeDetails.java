@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -30,5 +31,7 @@ public class EmployeeDetails {
     private String address;
 
     private String position;
+
+    private List<EmployeeProjectListItem> projects;
 
 }
