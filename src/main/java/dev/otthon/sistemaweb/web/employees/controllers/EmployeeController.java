@@ -5,9 +5,12 @@ import dev.otthon.sistemaweb.core.repositories.EmployeeRepository;
 import dev.otthon.sistemaweb.core.repositories.PositionRepository;
 import dev.otthon.sistemaweb.web.employees.dtos.EmployeeForm;
 import dev.otthon.sistemaweb.web.employees.mappers.EmployeeMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,7 +60,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public String create(EmployeeForm employeeForm) {
+    public String create(@Valid EmployeeForm employeeForm, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("pageTitle", "Cadastro de Funcionário");
+            model.addAttribute("positions", positionRepository.findAll());
+            return "employees/form";
+        }
+
         var employee = employeeMapper.toEmployee(employeeForm);
         employeeRepository.save(employee);
         return "redirect:/employees";
@@ -78,7 +88,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, EmployeeForm employeeForm) {
+    public String edit(@PathVariable Long id, @Valid EmployeeForm employeeForm, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("pageTitle", "Cadastro de Funcionário");
+            model.addAttribute("positions", positionRepository.findAll());
+            return "employees/form";
+        }
+
         var employee = employeeRepository.findById(id)
                 .orElseThrow(EmployeeNotFoundException::new);
         var employeeData = employeeMapper.toEmployee(employeeForm);
