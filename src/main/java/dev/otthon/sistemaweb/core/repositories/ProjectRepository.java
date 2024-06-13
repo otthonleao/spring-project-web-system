@@ -13,6 +13,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findAll();
 
     @EntityGraph(attributePaths = { "client", "manager", "team", "team.position" })
+
     Optional<Project> findById(Long id);
 
 }

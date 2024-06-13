@@ -50,7 +50,7 @@ public class ProjectController {
     public ModelAndView create() {
         var clients = clientRepository.findAll();
         var team = employeeRepository.findByPositionNameNot("Gerente de Projetos");
-        var managers = employeeRepository.findByPositionName("Gerente de Projetos");
+        var managers = employeeRepository.findManagers();
 
         var model = Map.of(
                 "pageTitle", "Cadastro de Projeto",
