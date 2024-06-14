@@ -4,9 +4,14 @@ import dev.otthon.sistemaweb.core.models.Client;
 import dev.otthon.sistemaweb.core.utils.StringUtils;
 import dev.otthon.sistemaweb.web.clients.dtos.ClientForm;
 import dev.otthon.sistemaweb.web.clients.dtos.ClientListItem;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(
+        name = "dev.otthon.sistemaweb.mappers.provider",
+        havingValue = "local"
+)
 public class ClientMapperImpl implements ClientMapper {
 
     @Override
