@@ -1,5 +1,9 @@
 package dev.otthon.sistemaweb.web.employees.dtos;
 
+import dev.otthon.sistemaweb.core.validators.Age;
+import dev.otthon.sistemaweb.core.validators.Comparison;
+import dev.otthon.sistemaweb.core.validators.FieldsComparison;
+import dev.otthon.sistemaweb.core.validators.ResignationDateGreatherThanHireDate;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -11,12 +15,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-import static java.time.temporal.WeekFields.ISO;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//@ResignationDateGreatherThanHireDate
+@FieldsComparison(
+        field = "hireDate",
+        fieldToCompare = "resignationDate",
+        comparison = Comparison.LESS_THAN,
+        message = "a data de demissão deve ser maior que a data de contratação",
+        fieldError = "resignationDate"
+)
 public class EmployeeForm {
 
     @NotEmpty
@@ -40,6 +50,7 @@ public class EmployeeForm {
 
     @Past
     @NotNull
+    @Age(min = 18, max = 100)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 

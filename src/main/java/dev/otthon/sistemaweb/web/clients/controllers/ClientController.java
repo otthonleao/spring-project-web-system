@@ -7,6 +7,7 @@ import dev.otthon.sistemaweb.core.exceptions.ClientNotFoundException;
 import dev.otthon.sistemaweb.web.clients.mappers.ClientMapper;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,9 +49,10 @@ public class ClientController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid ClientForm clientForm, BindingResult result) {
+    public String create(@Valid ClientForm clientForm, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("pageTitle", "Cadastro de Cliente");
             return "clients/form";
         }
 
@@ -72,9 +74,10 @@ public class ClientController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, @Valid ClientForm clientForm, BindingResult result) {
+    public String edit(@PathVariable Long id, @Valid ClientForm clientForm, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("pageTitle", "Cadastro de Cliente");
             return "clients/form";
         }
 

@@ -1,5 +1,6 @@
 package dev.otthon.sistemaweb.web.clients.dtos;
 
+import dev.otthon.sistemaweb.core.validators.ClientEmailUnique;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class ClientForm {
     @Email
     @NotBlank
     @Size(max = 255)
+    @ClientEmailUnique
     private String email;
 
     @NotEmpty

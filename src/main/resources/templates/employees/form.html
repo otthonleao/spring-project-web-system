@@ -13,6 +13,10 @@
 
           <form method="post" th:object="${employeeForm}">
 
+            <ul>
+              <li class="text-danger" th:each="error : ${#fields.errors('global')}" th:text="${error}"></li>
+            </ul>
+
             <fieldset>
               <legend>Dados Pessoais</legend>
               
