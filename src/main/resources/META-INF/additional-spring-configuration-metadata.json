@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "dev.otthon.sistemaweb.mappers.provider",
+      "type": "dev.otthon.sistemaweb.config.MapperProviders",
+      "description": "Implementação a ser utilizada para a camada mapper"
+    }
+  ]
+}
