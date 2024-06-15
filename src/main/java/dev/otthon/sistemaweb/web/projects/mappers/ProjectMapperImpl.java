@@ -10,10 +10,15 @@ import dev.otthon.sistemaweb.web.projects.dtos.ProjectDetails;
 import dev.otthon.sistemaweb.web.projects.dtos.ProjectForm;
 import dev.otthon.sistemaweb.web.projects.dtos.ProjectListItem;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(
+        name = "dev.otthon.sistemaweb.mappers.provider",
+        havingValue = "local"
+)
 public class ProjectMapperImpl implements ProjectMapper {
 
     private final ClientRepository clientRepository;
