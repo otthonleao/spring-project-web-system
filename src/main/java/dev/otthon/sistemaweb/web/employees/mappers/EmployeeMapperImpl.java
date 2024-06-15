@@ -9,10 +9,15 @@ import dev.otthon.sistemaweb.web.employees.dtos.EmployeeDetails;
 import dev.otthon.sistemaweb.web.employees.dtos.EmployeeForm;
 import dev.otthon.sistemaweb.web.employees.dtos.EmployeeListItem;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(
+        name = "dev.otthon.sistemaweb.mappers.provider",
+        havingValue = "local"
+)
 public class EmployeeMapperImpl implements EmployeeMapper {
 
     private final AddressMapper addressMapper;

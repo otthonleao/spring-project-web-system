@@ -3,9 +3,14 @@ package dev.otthon.sistemaweb.web.employees.mappers;
 import dev.otthon.sistemaweb.core.models.Address;
 import dev.otthon.sistemaweb.core.utils.StringUtils;
 import dev.otthon.sistemaweb.web.employees.dtos.AddressForm;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(
+        name = "dev.otthon.sistemaweb.mappers.provider",
+        havingValue = "local"
+)
 public class AddressMapperImpl implements AddressMapper{
 
     @Override
