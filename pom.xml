@@ -14,7 +14,7 @@
     <name>sistema-web</name>
     <description>sistema-web</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <webjar-locator.version>0.47</webjar-locator.version>
 		<webjar-adminlte.version>3.2.0</webjar-adminlte.version>
 		<webjar-crypto-js.version>4.1.1</webjar-crypto-js.version>
@@ -35,6 +35,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>
