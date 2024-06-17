@@ -55,4 +55,7 @@ public class Employee {
     // A JPA não cria uma nova coluna, ela entende que deve buscar uma lista de projetos do team por mapeamento
     @ManyToMany(mappedBy = "team")
     private List<Project> projects;
+
+    @Column(nullable = false)
+    private String password;
 }

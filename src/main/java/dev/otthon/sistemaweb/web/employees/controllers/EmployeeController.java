@@ -8,6 +8,7 @@ import dev.otthon.sistemaweb.web.employees.mappers.EmployeeMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class EmployeeController {
     private final EmployeeMapper employeeMapper;
     private final EmployeeRepository employeeRepository;
     private final PositionRepository positionRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ModelAndView index() {
@@ -69,6 +71,11 @@ public class EmployeeController {
         }
 
         var employee = employeeMapper.toEmployee(employeeForm);
+
+        // Usando senha criptografada em forma de hash para ser salva no banco
+        var passwordHash = passwordEncoder.encode("changeMe"); // Senha padrão ao criar um novo usuário
+        employee.setPassword(passwordHash);
+
         employeeRepository.save(employee);
         return "redirect:/employees";
     }
@@ -99,7 +106,7 @@ public class EmployeeController {
         var employee = employeeRepository.findById(id)
                 .orElseThrow(EmployeeNotFoundException::new);
         var employeeData = employeeMapper.toEmployee(employeeForm);
-        BeanUtils.copyProperties(employeeData, employee, "id");
+        BeanUtils.copyProperties(employeeData, employee, "id", "password"); // Ignora esses campos quando for editar funcionário
         employeeRepository.save(employee);
         return "redirect:/employees";
     }

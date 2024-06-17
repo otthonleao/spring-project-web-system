@@ -1,6 +1,7 @@
 package dev.otthon.sistemaweb.core.repositories;
 
 import dev.otthon.sistemaweb.core.models.Employee;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query("SELECT e FROM Employee e WHERE e.position.name = 'Gerente de projetos'")
     List<Employee> findManagers();
+
+    // Retornar email para fazer o login no AuhenticationService.class
+    Optional<Employee> findByEmail(String email);
 }
