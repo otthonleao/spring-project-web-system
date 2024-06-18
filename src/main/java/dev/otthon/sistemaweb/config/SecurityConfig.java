@@ -1,6 +1,8 @@
 package dev.otthon.sistemaweb.config;
 
 import dev.otthon.sistemaweb.core.services.authorization.Authority;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,7 +15,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 //@EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
+
+    private final AuthConfigProperties authConfigProperties;
 
     private static final String[] ADMIN_MATCHERS = {
 
@@ -50,6 +55,9 @@ public class SecurityConfig {
             ).logout(customizer -> customizer
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "GET"))
                 .logoutSuccessUrl("/auth/login")
+            ).rememberMe(customizer -> customizer
+                .key(authConfigProperties.getRememberMeToken())
+                .tokenValiditySeconds(authConfigProperties.getRememberMeValiditySeconds()) // Deixa o user logado por 7 dias
             ).build();
     }
 
