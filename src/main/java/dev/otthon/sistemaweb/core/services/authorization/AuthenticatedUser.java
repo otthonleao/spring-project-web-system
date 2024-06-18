@@ -20,7 +20,10 @@ public class AuthenticatedUser implements UserDetails {
     /* AUTORIZAÇÕES QUE O USUÁRIO PODE FAZER NO SISTEMA */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.NO_AUTHORITIES; // Nenhum sistema de autorização
+//        return AuthorityUtils.NO_AUTHORITIES; // Nenhum sistema de autorização
+        var authority = employee.getPosition().getName().equals("Gerente de Projetos")
+                ? Authority.ADMIN : Authority.USER;
+        return AuthorityUtils.createAuthorityList(authority.name());
     }
 
     /* COMO O SISTEMA OBTEM A SENHA DO USUÁRIO */
@@ -44,7 +47,7 @@ public class AuthenticatedUser implements UserDetails {
     /* PARA SABER SE A CONTA DO USUÁRIO ESTÁ BLOQUEADA OU NÃO */
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return employee.getResignationDate() == null; // Se a data de demissão tiver valor, o user é bloqueado
     }
 
     /* PARA SABER SE AS CREDENCIAIS/SENHA DO USUÁRIO ESTÁ EXPIRADA */

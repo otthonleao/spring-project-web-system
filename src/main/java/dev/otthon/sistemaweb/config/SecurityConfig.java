@@ -1,7 +1,9 @@
 package dev.otthon.sistemaweb.config;
 
+import dev.otthon.sistemaweb.core.services.authorization.Authority;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -10,13 +12,34 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+//@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+    private static final String[] ADMIN_MATCHERS = {
+
+            "/*/create",
+            "/*/edit/**",
+            "/*/delete/**",
+//            "/clients/create",
+//            "/clients/edit/**",
+//            "/clients/delete/**",
+//            "/employees/create",
+//            "/employees/edit/**",
+//            "/employees/delete/**",
+//            "/projects/create",
+//            "/projects/edit/**",
+//            "/projects/delete/**",
+//            "/positions/create",
+//            "/positions/edit/**",
+//            "/positions/delete/**",
+    };
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(customizer -> customizer
-                .anyRequest()
-                .authenticated() // Todas as requisições precisam estar autenticadas
+                .requestMatchers(ADMIN_MATCHERS).hasAuthority(Authority.ADMIN.name())
+                        .anyRequest()
+                        .authenticated() // Todas as requisições dentro de "/clients/create" precisam estar autenticadas com ADMIN
 //                .permitAll()
             ).formLogin(customizer -> customizer
                 .loginPage("/auth/login") // Localização da rota de login
