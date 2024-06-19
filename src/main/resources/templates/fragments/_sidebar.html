@@ -8,6 +8,14 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
+
+    <!-- EXIBINDO O NOME DO USER VIA thymeleaf-extra-security6 -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="info">
+        <a th:href="@{/auth/update-password}" sec:authentication="principal.employee.name"></a>
+      </div>
+    </div>
+
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -22,7 +30,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER O BOTÃO DE CADASTRAR -->
               <a th:href="@{/clients/create}" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                 <p>Cadastrar</p>
@@ -47,7 +55,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER O BOTÃO DE CADASTRAR -->
               <a th:href="@{/employees/create}" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                 <p>Cadastrar</p>
@@ -72,7 +80,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER O BOTÃO DE CADASTRAR -->
               <a th:href="@{/positions/create}" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                 <p>Cadastrar</p>
@@ -97,7 +105,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER O BOTÃO DE CADASTRAR -->
               <a th:href="@{/projects/create}" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                 <p>Cadastrar</p>
