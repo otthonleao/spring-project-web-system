@@ -71,7 +71,7 @@
                 </li>
               </ul>
               
-              <div class="text-center mt-5 mb-3">
+              <div class="text-center mt-5 mb-3" sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER OS BOTÕES DE EDITAR E EXCLUIR -->>
                 <a
                   class="btn btn-sm btn-warning"
                   th:href="@{/projects/edit/{id} (id=${project.id})}"

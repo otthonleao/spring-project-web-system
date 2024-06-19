@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-title">Listagem de Cargos</div>
-            <div class="card-tools">
+            <div class="card-tools" sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER OS BOTÃO DE NOVO CARGO-->
               <a
                 th:href="@{/positions/create}"
                 class="btn btn-sm btn-primary"
@@ -25,7 +25,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nome</th>
-                  <th scope="col">Ações</th>
+                  <th scope="col" sec:authorize="hasAuthority('ADMIN')">Ações</th> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER A COLUNA -->
                 </tr>
               </thead>
               <tbody>
@@ -45,6 +45,7 @@
                       class="btn btn-sm btn-danger"
                       role="button"
                       onclick="return confirm('Tem certeza que deseja excluir?');"
+                      sec:authorize="hasAuthority('ADMIN')"> <!-- SOMENTE O USER QUE FOR 'ADMIN' VAI VER OS BOTÃO DE EXCLUIR -->
                     >
                       Excluir
                     </a>

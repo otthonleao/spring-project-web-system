@@ -25,6 +25,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Entre com suas credenciais para iniciar a seção</p>
 
+            <!-- ALERTA DE ERRO QUANDO O LOGIN FALHAR -->
             <div th:if="${param.error != null}" class="alert alert-danger">
                 <span th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></span>
             </div>
